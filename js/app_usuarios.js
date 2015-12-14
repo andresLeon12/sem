@@ -1,6 +1,6 @@
 /* Controlador para secretario */
 var app = angular.module('secreto', [])
-var url_server = 'http://10.42.0.1:8080/';
+var url_server = 'http://192.168.1.103:8080/';
 
 app.controller('gerenteController', function($scope, $http){
 	$scope.usuarios = {}
