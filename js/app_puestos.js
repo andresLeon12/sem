@@ -6,8 +6,9 @@ app.controller('gerenteController', function($scope, $http){
 	$scope.puestoN = {}
 	$scope.puest = {}
     $scope.puesto = {}
-    var empresa = JSON.parse(localStorage.getItem("empresa_server"))
-    empresa = empresa[0]
+    //var empresa = JSON.parse(localStorage.getItem("empresa_server"))
+    //empresa = empresa[0]
+    var empresa = localStorage.getItem("empresa_server")
     /*if(empresa == null)
         window.location.href = '../inicio.html'*/
     /* Obtenemos los parametros de la url */
