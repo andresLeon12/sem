@@ -8,7 +8,7 @@ app.controller('gerenteController', function($scope, $http){
     $scope.puesto = {}
     //var empresa = JSON.parse(localStorage.getItem("empresa_server"))
     //empresa = empresa[0]
-    var empresa = localStorage.getItem("empresa_server")
+    var empresa = JSON.parse(localStorage.getItem("empresa_server"))
     /*if(empresa == null)
         window.location.href = '../inicio.html'*/
     /* Obtenemos los parametros de la url */
@@ -23,6 +23,7 @@ app.controller('gerenteController', function($scope, $http){
 
     /* Método para obtener los puestos de la BD */
     function getPuesto(){
+        alert(empresa._id)
         $http.get(url_server+"puesto/listar/"+empresa._id).success(function(response) {
             if(response.status == "OK") {
             	$scope.puest = response.data;
