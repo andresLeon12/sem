@@ -23,7 +23,6 @@ app.controller('gerenteController', function($scope, $http){
 
     /* Método para obtener los puestos de la BD */
     function getPuesto(){
-        alert(empresa._id)
         $http.get(url_server+"puesto/listar/"+empresa._id).success(function(response) {
             if(response.status == "OK") {
             	$scope.puest = response.data;
