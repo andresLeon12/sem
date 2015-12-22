@@ -8,8 +8,8 @@ app.controller('gerenteController', function($scope, $http){
     $scope.puesto = {}
     var empresa = JSON.parse(localStorage.getItem("empresa_server"))
     empresa = empresa[0]
-    if(empresa == null)
-        window.location.href = '../index.html'
+    /*if(empresa == null)
+        window.location.href = '../inicio.html'*/
     /* Obtenemos los parametros de la url */
     var edit = getUrlParameter('id');
     if (edit == undefined) {
