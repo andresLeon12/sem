@@ -1,6 +1,6 @@
 /* Controlador para secretario */
 var app = angular.module('secreto', [])
-var url_server = 'http://192.168.1.103:8080/';
+var url_server = 'http://159.203.128.165:8080/';
 
 app.controller('gerenteController', function($scope, $http){
 	$scope.usuarios = {}
@@ -8,7 +8,10 @@ app.controller('gerenteController', function($scope, $http){
     $scope.usuario = {}
 	$scope.puestoN = {}
 	$scope.puest = {}
-	
+    var empresa = JSON.parse(localStorage.getItem("empresa_server"))
+    empresa = empresa[0]
+	if(empresa == null)
+        window.location.href = '../index.html'
     /* Obtenemos los parametros de la url */
     var edit = getUrlParameter('id');
     /* Llamamos a la función para obtener la lista de usuario al cargar la pantalla */
@@ -22,13 +25,13 @@ app.controller('gerenteController', function($scope, $http){
 
     /* Método para obtener la lista de usuario */
     function getUsuario() {
-        $http.get(url_server+'user/listar').
+        $http.get(url_server+'user/listar/'+empresa._id).
 		success(function(response){
         	if(response.status == "OK") {
             	$scope.usuarios = response.data;
             	if($scope.usuarios.length == 0){
 					$("#mensaje").empty();
-					$("#mensaje").append('<div class="row"><div class="col s12 m12 l12"><div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">Bienvenido a SECRETO</span><p>Aún no hay usuarios registrados en el sistema, comienza agregando usuarios y disfruta de SECRETO.</p></div></div></div></div>');
+					$("#mensaje").append('<div class="row"><div class="col s12 m12 l12"><div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">Ops</span><p>Aún no hay usuarios registrados en el sistema.</p></div></div></div></div>');
 					$("#mensaje").css('color', '#d50000');
 				}else{
                     $("#mensaje").empty();
@@ -48,7 +51,7 @@ app.controller('gerenteController', function($scope, $http){
 
     /* Método para obtener los puestos de la BD */
     function getPuesto(){
-        $http.get(url_server+"puesto/listar").success(function(response) {
+        $http.get(url_server+"puesto/listar/"+empresa._id).success(function(response) {
             if(response.status == "OK") {
             	$scope.puest = response.data;
         	}
@@ -60,26 +63,32 @@ app.controller('gerenteController', function($scope, $http){
         // Hacemos un POST a la API para dar de alta nuestro nuevo ToDo
         var nombre_puesto = $("#puesto_empleado option:selected").text();
         $scope.usuarioN.puesto_nombre = nombre_puesto;
+        $scope.usuarioN.empresa = empresa._id;
         /* Cuando se crea un usuario su clave de acceso es su correo */
         $scope.usuarioN.clave = $scope.usuarioN.email;
-        $http.post(url_server+"user/crear", $scope.usuarioN).success(function(response) {
-            if(response.status === "OK") { // Si nos devuelve un OK la API...
-                $("#mensaje").empty();
-                var nombres = $scope.usuarioN.nombreC.split(' ')
-                $("#mensaje").append('<div class="chip">Usuario '+nombres[0]+' agregado<i class="material-icons">Cerrar</i></div>');
-                $("#mensaje").css('color', '#FFF');
-                $scope.usuarioN = {}; // Limpiamos el scope
-            }
+        $http.get(url_server+"puesto/buscar/"+$scope.usuarioN.puesto, $scope.usuarioN).success(function(response) {
+            $scope.usuarioN.nivel = response.data[0].nivel;
+            $scope.usuarioN.clave = $scope.usuarioN.email;
+            $http.post(url_server+"user/crear", $scope.usuarioN).success(function(response) {
+                if(response.status === "OK") { // Si nos devuelve un OK la API...
+                    $("#error").empty();
+                    var nombres = $scope.usuarioN.nombreC.split(' ')
+                    $("#error").append('<div class="chip">Usuario '+nombres[0]+' agregado<i class="material-icons">Cerrar</i></div>');
+                    $("#error").css('color', '#FFF');
+                    $scope.usuarioN = {}; // Limpiamos el scope
+                }
+            });
         });
+        
     }
 
     $scope.deleteUsuario = function(id) {
         // Hacemos una petición DELETE a la API para borrar el id que nos pase el html por parametro
         $http.delete(url_server+"user/eliminar", { params : {identificador: id}}).success(function(response) {
             if(response.status === "OK") { // Si la API nos devuelve un OK...
-                $("#mensaje").empty();
-                $("#mensaje").append('<div class="chip">Usuario eliminado <a href="usuarios.html">Volver a lista de usuarios</a></div>');
-                $("#mensaje").css('color', '#FFF');
+                $("#error").empty();
+                $("#error").append('<div class="chip">Usuario eliminado <a href="usuarios.html">Volver a lista de usuarios</a></div>');
+                $("#error").css('color', '#FFF');
                 $(".card-reveal").fadeOut()
                 $scope.usuario = {}
             }
@@ -98,9 +107,9 @@ app.controller('gerenteController', function($scope, $http){
         $http.put(url_server+"user/actualizar", usuario).success(function(response) {
             if(response.status === "OK") {
                 getUsuarioUnico(); // Actualizamos la lista de ToDo's
-                $("#mensaje").empty();
-                $("#mensaje").append('<div class="chip">Información actualizada <i class="material-icons">Cerrar</i></div>');
-                $("#mensaje").css('color', '#FFF');
+                $("#error").empty();
+                $("#error").append('<div class="chip">Información actualizada <i class="material-icons">Cerrar</i></div>');
+                $("#error").css('color', '#FFF');
                 $(".card-reveal").fadeOut()
             }
         });

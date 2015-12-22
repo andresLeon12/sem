@@ -53,6 +53,7 @@
             <section id="content">
             	<div class="container">
             		<blockquote style="border-left: 5px solid #ee6e73;">Lista de Usuarios</blockquote>
+            		<div id="mensaje"></div>
             		<ul class="collection" ng-repeat='usuario in usuarios' style="margin-bottom:0;margin-top:0;">
             			<li class="collection-item avatar" style="border-left: solid 5px #80deea;">
             				<a href="usuario.html?id={{usuario._id}}">
@@ -65,15 +66,6 @@
 									Puesto: {{usuario.puesto_nombre}}
 								</p>
 							</a>
-							<!--<div class="fixed-action-btn horizontal secondary-content">
-							    <a class="btn-floating btn red">
-							      <i class="large mdi-navigation-menu"></i>
-							    </a>
-							    <ul>
-							      <li><a id="#{{usuario._id}}-Update" class="btn-floating brown modal-trigger"><i class="mdi-editor-mode-edit"></i></a></li>
-							      <li><a id="#{{usuario._id}}-Delete" class="btn-floating red darken-1 modal-trigger"><i class="mdi-action-delete"></i></a></li>
-							    </ul>
-						  	</div>-->
 						</li>
             		</ul>
             	</div>

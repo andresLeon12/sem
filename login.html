@@ -12,7 +12,7 @@
 			<script type="text/javascript" src="js/plugins.min.js"></script>
 			<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
 			<script type="text/javascript" src="js/app_gerente.js"></script>
-			<script type="text/javascript" src="cordova.js"></script>-
+			<!--<script type="text/javascript" src="cordova.js"></script>-->
 			<link rel='shortcut icon' type='image/x-icon' href='images/logo.png') />
 			<link rel='stylesheet' href='css/materialize.css'/>
 			<link rel='stylesheet' href='css/materialize.min.css'/>
@@ -66,82 +66,33 @@
     	<div id="mensaje"></div>
     	<div class="row" style="width:100%">
 	    	<div class="col s12 z-depth-4 card-panel" style="width:100%">
-	      		<form class="" ng-submit="registrarEmpresa()">
+	      		<form class="" ng-submit="loginEmpresa()">
 	        		<div class="row">
 	          			<div class="input-field col s12 center">
-	            			<h4>Registrar</h4>
-	            			<p class="center">Regitre su empresa en SECRETO</p>
+	            			<h4>Iniciar sesión</h4>
+	            			<p class="center">Iniciar sesión en SECRETO</p>
 	          			</div>
 	        		</div>
 	        		<div class="row margin">
 	          			<div class="input-field col s12">
 	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="rfc" ng-model="empresa.RFC" type="text">
-	            			<label for="rfc"  class="center-align">RFC de la empresa</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="nombre" ng-model="empresa.nombre" type="text">
+	            			<input id="nombre" ng-model="datos.nombre" type="text">
 	            			<label for="nombre"  class="center-align">Nombre de la empresa</label>
 	          			</div>
 	        		</div>
 	        		<div class="row margin">
 	          			<div class="input-field col s12">
 	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="direccion" ng-model="empresa.direccion" type="text">
-	            			<label for="direccion"  class="center-align">Dirección</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="colonia" ng-model="empresa.colonia" type="text">
-	            			<label for="colonia"  class="center-align">Colonia</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="municipio" ng-model="empresa.municipio" type="text">
-	            			<label for="municipio"  class="center-align">Municipio</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="estado" ng-model="empresa.estado" type="text">
-	            			<label for="estado"  class="center-align">Estado</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-av-closed-caption prefix"></i>
-	            			<input id="cp" ng-model="empresa.cp" type="text">
-	            			<label for="cp"  class="center-align">Código Postal</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-communication-phone prefix"></i>
-	            			<input id="celular" ng-model="empresa.celular" type="number" maxlength="10" minlength='10'>
-	            			<label for="celular"  class="center-align">Número de celular del directivo</label>
-	          			</div>
-	        		</div>
-	        		<div class="row margin">
-	          			<div class="input-field col s12">
-	            			<i class="mdi-communication-email prefix"></i>
-	            			<input id="email" ng-model="empresa.email" type="email">
-	            			<label for="email"  class="center-align">Correo del directivo</label>
+	            			<input id="nombre" ng-model="datos.clave" type="text">
+	            			<label for="nombre"  class="center-align">Clave de la empresa</label>
 	          			</div>
 	        		</div>
 	        		<div class="row">
 	          			<div class="input-field col s12">
-	          				<input type="submit" class="btn waves-effect waves-light col s12" value="Registrar">
+	          				<input type="submit" class="btn waves-effect waves-light col s12" value="Ingresar">
 	          			</div>
 	          			<div class="input-field col s12">
-	            			<p class="margin center medium-small sign-up"> <a href="login.html">Iniciar sesión</a></p>
+	            			<p class="margin center medium-small sign-up"> <a href="index.html">Registrarme</a></p>
 	          			</div>
 	        		</div>
 	      		</form>
