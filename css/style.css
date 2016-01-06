@@ -1,0 +1,11 @@
+.titulo_empresa {
+	color: #ee6e73;
+    font-weight: 300;
+    text-align: center;
+    font-weight: 300;
+    padding: 5px;
+}
+
+.titulo_tarjeta {
+	border-radius: 0 10px 10px 0;
+}

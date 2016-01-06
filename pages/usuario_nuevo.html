@@ -12,14 +12,22 @@
 			<script type="text/javascript" src="../js/materialize.min.js"></script>
 			<script type="text/javascript" src="../js/plugins.min.js"></script>
 			<script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>
+			<script type='text/javascript'src='../js/picker.time.js'></script>
 			<script type="text/javascript" src="../js/app_gerente.js"></script>
 			<script type="text/javascript" src="../js/app_usuarios.js"></script>
 			<script type="text/javascript" src="../cordova.js"></script>
+			<script type="text/javascript" src="../js/background-mode.js"></script>
+			<script type="text/javascript">
+				function quitarMsj () {
+					error.innerHTML = "";
+				}
+			</script>
 			<link rel='shortcut icon' type='image/x-icon' href='images/logo.png') />
 			<link rel='stylesheet' href='../css/materialize.css'/>
 			<link rel='stylesheet' href='../css/materialize.min.css'/>
 			<link rel='stylesheet' href='../css/perfect-scrollbar.css'/>
 			<link rel='stylesheet' href='../css/style.min.css'/>
+			<link rel='stylesheet' type='text/css'href='../css/classic.time.css'/>
 			<style type="text/css">
 				html,body {
 				    height: 100%;
@@ -39,8 +47,22 @@
 					left: 0;
 				}
 			</style>
+			<script type="text/javascript">
+				function convertToUpper(){
+					//alert("upper");
+					cadena = (document.getElementById('rfc').value).toUpperCase();
+					//cadena = document.getElementById('rfc').value;
+					//alert(cadena);
+					document.getElementById('rfc').value = cadena;
+				}
+				function mostrarEmpresa(){
+					//<b>Empresa Patito S.A. de C.V. Civiluche as d as das d sa  d sa d  as dsa  das</b>
+					var data_empresa = JSON.parse(localStorage.getItem("empresa_server"));
+					nombreEmpresa.innerHTML = "Empresa: <b>"+data_empresa[0].nombre+"</b>";
+				}
+			</script>
 		</head>
-		<body ng-controller='gerenteController'>
+		<body ng-controller='gerenteController' onload="mostrarEmpresa()">
 			<div id="loader-wrapper">
 		        <div id="loader"></div>        
 		        <div class="loader-section section-left"></div>
@@ -62,39 +84,63 @@
         		<!-- end header nav-->
     		</header>
     <!-- END HEADER -->
+    <br><br><br>
     <div class="container">
-    	<div id="error"></div>
     	<div id="login-page" class="row">
 	    	<div class="col s12 z-depth-4 card-panel">
 	      		<form ng-submit="nuevoUsuario()">
 	        		<div class="row">
+	        			<br>
+	        			<div id="nombreEmpresa" style="text-align:center;font-weight:bolder;"></div>
 	          			<div class="input-field col s12 center">
 	            			<h4>Registrar</h4>
-	            			<p class="center">Agrega un nuevo usuario al sistema</p>
+	            			<p class="center">Agrega un nuevo empleado(a) al sistema</p>
+	          			</div>
+	        		</div>
+	        		<h5 class="left" style="padding:0px 0px 0px 10px;">Numero de Empleado: {{newClave}}</h5>
+	        		<div class="row margin">
+	          			<div class="input-field col s12">
+	            			<i class="mdi-social-person-outline prefix"></i>
+	            			<input id="rfc" ng-model="usuarioN.rfc" type="text" onkeyup="convertToUpper()" onkeypress="quitarMsj()" required>
+	            			<label for="rfc"  class="center-align">RFC</label>
 	          			</div>
 	        		</div>
 	        		<div class="row margin">
 	          			<div class="input-field col s12">
 	            			<i class="mdi-social-person-outline prefix"></i>
-	            			<input id="username" ng-model="usuarioN.nombreC" type="text">
+	            			<input id="username" ng-model="usuarioN.nombreC" type="text" required>
 	            			<label for="username"  class="center-align">Nombre completo</label>
 	          			</div>
 	        		</div>
 	        		<div class="row margin">
 	          			<div class="input-field col s12">
 	            			<i class="mdi-communication-email prefix"></i>
-	            			<input id="email" ng-model="usuarioN.email" type="email">
-	            			<label for="email"  class="center-align">Correo</label>
+	            			<input id="email" ng-model="usuarioN.email" type="email" required>
+	            			<label for="email"  class="center-align">Email</label>
 	          			</div>
 	        		</div>
-	        		<div class="">
+	        		<div class="row margin">
+	          			<div class="input-field col s12">
+	            			<i class="mdi-communication-phone prefix"></i>
+	            			<input id="celular" ng-model="usuarioN.celular" type="number" maxlength="10" required>
+	            			<label for="celular"  class="center-align">Celular (10 Digitos)</label>
+	          			</div>
+	        		</div>
+	        		<div class="row margin">
 	          			<div class="col s12">
 	            			<label class="col-sm-1 control-label">Puesto</label>
 				            <div class="col-sm-12">
-				            	<select class="browser-default" ng-model="usuarioN.puesto" required id="puesto_empleado">
+				            	<select class="browser-default" onchange="quitarMsj()" ng-model="usuarioN.puesto" required id="puesto_empleado" required>
 				                	<option ng-repeat="p in puest" value="{{p._id}}">{{p.nombreP}}</option>
 				                </select>
 				            </div>
+	          			</div>
+	        		</div>
+	        		<div class="row margin">
+	          			<div class="input-field col s12">
+	            			<i class="mdi-editor-insert-invitation prefix"></i>
+	            			<input type="text" id="nac" class="datepicker" onclick="quitarMsj()" ng-model="usuarioN.fecha_nac" required>
+	            			<label for="nac"  class="center-align">Fecha de Nacimiento</label>
 	          			</div>
 	        		</div>
 	        		<div class="row">
@@ -105,9 +151,23 @@
 	            			<p class="margin center medium-small sign-up"> <a href="../index.html">Cancelar</a></p>
 	          			</div>
 	        		</div>
+	        		<div id="error"></div>
+	        		<div class="row">
+	        			<a href="usuarios.html" class="wavs-effects wavs-green btn-flat"><i class="mdi-action-visibility"></i> Ver todos los Empleados</a>
+	        		</div>
 	      		</form>
 	    	</div>
 	  	</div>
     </div>
+    <script type="text/javascript">
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 100, // Creates a dropdown of 15 years to control year
+        //min:new Date(),
+        firstDay: 1,
+        format: 'dd/mm/yyyy',
+        formatSubmit: 'dd/mm/yyyy'
+    });
+    </script>
 </body>
 </html>		

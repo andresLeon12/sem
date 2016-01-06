@@ -13,6 +13,7 @@ app.controller('gerenteController', function($scope, $http){
 	/* Función para registrar una empresa en el sistema */
 	$scope.registrarEmpresa = function() {
 		// Hacemos un POST a la API para dar de alta nuestro nuevo ToDo
+		$scope.empresa.clave = $scope.empresa._id;
         $http.post(url_server+"empresa/crear", $scope.empresa).success(function(response) {
             if(response.status === "OK") { // Si nos devuelve un OK la API...
             	if(typeof(Storage) !== "undefined") {

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+		<html ng-app='perfil'>
+		<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+			<meta name="msapplication-tap-highlight" content="no" />
+			<meta charset="utf-8" >
+			<title>SECRETO</title>
+			<script type="text/javascript" src="../js/jquery-2.0.0.min.js"></script>
+			<script type="text/javascript" src="../js/angular.min.js"></script>
+			<!--<script type="text/javascript" src="../js/materialize.js"></script>-->
+			<script type="text/javascript" src="../js/materialize.min.js"></script>
+			<script type="text/javascript" src="../js/plugins.min.js"></script>
+			<script type="text/javascript" src="../js/perfect-scrollbar.min.js"></script>
+			<script type="text/javascript" src="../js/app_gerente.js"></script>
+			<script type="text/javascript" src="../js/app_perfil.js"></script>
+			<script type="text/javascript" src="../js/app_usuarios.js"></script>
+			<script type="text/javascript" src="../cordova.js"></script>
+			<script type="text/javascript" src="../js/background-mode.js"></script>
+			<link rel='shortcut icon' type='image/x-icon' href='images/logo.png') />
+			<link rel='stylesheet' href='../css/materialize.css'/>
+			<link rel='stylesheet' href='../css/materialize.min.css'/>
+			<link rel='stylesheet' href='../css/perfect-scrollbar.css'/>
+			<link rel='stylesheet' href='../css/style.min.css'/>
+		</head>
+		<body ng-controller='perfilController'>
+			<div id="loader-wrapper">
+		        <div id="loader"></div>
+		        <div class="loader-section section-left"></div>
+		        <div class="loader-section section-right"></div>
+	    	</div>
+			<!-- Menú y encabezado -->
+			<header id="header" class="page-topbar">
+        		<!-- start header nav-->
+        		<div class="navbar-fixed">
+            		<nav class="navbar-color">
+                		<div class="nav-wrapper">
+                    		<ul class="left">
+                    			<li><a href="../inicio.html" style="font-size: 1.5rem;margin-left:10px;"><i class='mdi-navigation-arrow-back'></i></a></li>
+                      			<li><h1 class="logo-wrapper"><a href="../index.html" class="brand-logo darken-1"><img src="../img/logo.png" alt=""></a> <span class="logo-text">SECRETO</span></h1></li>
+                    		</ul>
+	                	</div>
+            		</nav>
+        		</div>
+        		<!-- end header nav-->
+    		</header>
+    <!-- END HEADER -->
+
+		<div class="container">
+			<div id="mensaje" style="margin-left:35%;margin-top:5%;"></div>
+			<div class="card">
+	     <div class="card-content">
+	       <span class="card-title activator grey-text text-darken-4">Actualizar información</span>
+					 <form class="form-horizontal" role="form" ng-submit="updateEmpresa()">
+
+				 <div class="form-group">
+					 <label for="nombre">RFC de la empresa</label>
+					 <div class="col s12 m12 l12">
+						 <input  type="text" class="validate" ng-model="empresa.RFC" required>
+					 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Nombre de la empresa</label>
+						 <div class="col-sm-12">
+						 <input type="text"  id="nombre" class="validate"  ng-model="empresa.nombre" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Dirección</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate"  ng-model="empresa.direccion" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Colonia</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate"  ng-model="empresa.colonia" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Municipio</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate"  ng-model="empresa.municipio" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Estado</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate"  ng-model="empresa.estado" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Código Postal</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate" ng-model="empresa.cp" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Número de celular del directivo</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate"  ng-model="empresa.celular" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Correo del directivo</label>
+						 <div class="col-sm-12">
+						 <input type="email" class="validate"  ng-model="empresa.email" required>
+						 </div>
+				 </div>
+
+				 <div class="form-group">
+					 <label class="col-sm-1 control-label">Clave</label>
+						 <div class="col-sm-12">
+						 <input type="text" class="validate"  ng-model="empresa._id" required>
+						 </div>
+				 </div>
+
+					<span class="card-title activator grey-text text-darken-4 ">
+					 <div class="form-group">
+						 <button type="submit" class="btn btn waves-effect waves-red ">Actualizar información</button>
+					 </div>
+					</span>
+			 </form>
+	     </div>
+	   </div>
+		</div>
+</body>
+</html>

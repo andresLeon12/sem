@@ -1,6 +1,7 @@
 /* Controlador para secretario */
 var app = angular.module('secreto', [])
 var url_server = 'http://159.203.128.165:8080/';
+//var url_server = 'http://127.0.0.1:8080/';
 
 app.controller('gerenteController', function($scope, $http){
 	$scope.usuarios = {}
@@ -72,7 +73,7 @@ app.controller('gerenteController', function($scope, $http){
                 if(response.status === "OK") { // Si nos devuelve un OK la API...
                     $("#error").empty();
                     var nombres = $scope.usuarioN.nombreC.split(' ')
-                    $("#error").append('<div class="chip">Usuario '+nombres[0]+' agregado<i class="material-icons">Cerrar</i></div>');
+                    $("#error").append('<div class="chip col s12 m12 l12">Usuario '+nombres[0]+' agregado<i class="material-icons">Cerrar</i></div>');
                     $("#error").css('color', '#FFF');
                     $scope.usuarioN = {}; // Limpiamos el scope
                 }
@@ -128,3 +129,4 @@ app.controller('gerenteController', function($scope, $http){
         }
     };
 });
+//568aa78c7c95f69f11621f9f

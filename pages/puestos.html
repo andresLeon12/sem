@@ -15,6 +15,7 @@
 			<script type="text/javascript" src="../js/app_gerente.js"></script>
 			<script type="text/javascript" src="../js/app_puestos.js"></script>
 			<script type="text/javascript" src="../cordova.js"></script>
+			<script type="text/javascript" src="../js/background-mode.js"></script>
 			<link rel='shortcut icon' type='image/x-icon' href='images/logo.png') />
 			<link rel='stylesheet' href='../css/materialize.css'/>
 			<link rel='stylesheet' href='../css/materialize.min.css'/>
@@ -52,18 +53,25 @@
         <div class="wrapper">
             <section id="content">
             	<div class="container">
+            		<a href="puesto_nuevo.html?new=1" class="wavs-effects wavs-green btn-flat right"><i class="mdi-action-settings"></i> Dar de alta nuevo puesto</a>
             		<blockquote style="border-left: 5px solid #ee6e73;">Lista de Puestos</blockquote>
-            		<div id="mensaje"></div>
-            		<ul class="collection" ng-repeat='puesto in puest' style="margin-bottom:0;margin-top:0;">
-            			<li class="collection-item avatar" style="border-left: solid 5px #80deea;">
+            		<div class="divider"></div>
+            		<form class="col s12">
+				        <div class="input-field">
+				            <i class="mdi-action-search prefix"></i>
+				            <input id="icon_prefix" type="text" class="validate" ng-model='busqueda'>
+				        	<label for="icon_prefix" class="">Buscar</label>
+				        </div>
+					</form>
+					<div id="mensaje"></div>
+        			<div class="divider"></div>
+            		<ul class="collection" ng-repeat='puesto in puest|filter:busqueda' style="margin-bottom:0;margin-top:0;">
+            			<li class="collection-item avatar" style="border-left: solid 5px #80deea;height:45px;">
             				<a href="puesto.html?id={{puesto._id}}">
-								<i class='mdi-action-description circle green'></i>
-								<span class='title'>
+								<i class='mdi-action-work circle blue'></i>
+								<span class='title grey-text text-darken-4 '>
 									{{puesto.nombreP}}
 								</span>
-								<p style="color: grey">
-									{{puesto.claveP}}
-								</p>
 							</a>
 						</li>
             		</ul>
